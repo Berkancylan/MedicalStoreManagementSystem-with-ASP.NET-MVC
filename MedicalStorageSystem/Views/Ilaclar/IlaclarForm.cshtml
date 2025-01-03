@@ -1,0 +1,40 @@
+﻿@model MedicalStorageSystem.Models.EntityFramework.Ilac
+@{
+    ViewBag.Title = "IlaclarForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>İlaçlarForm</h2>
+
+@using (Html.BeginForm("Kaydet", "Ilaclar", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.medicine_code)
+        @Html.TextBoxFor(m => m.medicine_code, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.medicine_code)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.isim)
+        @Html.TextBoxFor(m => m.isim, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.isim)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.uretici)
+        @Html.TextBoxFor(m => m.uretici, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.uretici)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.fiyat)
+        @Html.TextBoxFor(m => m.fiyat, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.fiyat)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.stok_miktari)
+        @Html.TextBoxFor(m => m.stok_miktari, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.stok_miktari)
+    </div>
+
+    @Html.HiddenFor(m => m.ilac_id)
+    <button type="submit" class="btn btn-success">Kaydet</button>
+}

@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MedicalStoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Ilac">
+    <Key>
+      <PropertyRef Name="ilac_id" />
+    </Key>
+    <Property Name="ilac_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="medicine_code" Type="int" />
+    <Property Name="isim" Type="nvarchar" MaxLength="100" />
+    <Property Name="uretici" Type="nvarchar" MaxLength="100" />
+    <Property Name="fiyat" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="stok_miktari" Type="int" />
+  </EntityType>
+  <EntityType Name="Kullanici">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ad" Type="nvarchar" MaxLength="50" />
+    <Property Name="Sifre" Type="nchar" MaxLength="50" />
+    <Property Name="Role" Type="nvarchar" MaxLength="2" />
+  </EntityType>
+  <EntityType Name="Musteri">
+    <Key>
+      <PropertyRef Name="musteri_id" />
+    </Key>
+    <Property Name="musteri_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ad" Type="nvarchar" MaxLength="50" />
+    <Property Name="soyad" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Satis">
+    <Key>
+      <PropertyRef Name="satis_id" />
+    </Key>
+    <Property Name="satis_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="musteri_id" Type="int" />
+    <Property Name="ilac_id" Type="int" />
+    <Property Name="miktar" Type="int" />
+    <Property Name="tarih" Type="date" />
+  </EntityType>
+  <Association Name="FK_Satislar_Ilaclar1">
+    <End Role="Ilac" Type="Self.Ilac" Multiplicity="0..1" />
+    <End Role="Satis" Type="Self.Satis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ilac">
+        <PropertyRef Name="ilac_id" />
+      </Principal>
+      <Dependent Role="Satis">
+        <PropertyRef Name="ilac_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Satislar_Musteriler1">
+    <End Role="Musteri" Type="Self.Musteri" Multiplicity="0..1" />
+    <End Role="Satis" Type="Self.Satis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Musteri">
+        <PropertyRef Name="musteri_id" />
+      </Principal>
+      <Dependent Role="Satis">
+        <PropertyRef Name="musteri_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MedicalStoreModelStoreContainer">
+    <EntitySet Name="Ilac" EntityType="Self.Ilac" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Kullanici" EntityType="Self.Kullanici" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Musteri" EntityType="Self.Musteri" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Satis" EntityType="Self.Satis" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Satislar_Ilaclar1" Association="Self.FK_Satislar_Ilaclar1">
+      <End Role="Ilac" EntitySet="Ilac" />
+      <End Role="Satis" EntitySet="Satis" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Satislar_Musteriler1" Association="Self.FK_Satislar_Musteriler1">
+      <End Role="Musteri" EntitySet="Musteri" />
+      <End Role="Satis" EntitySet="Satis" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

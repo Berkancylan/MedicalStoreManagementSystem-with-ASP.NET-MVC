@@ -1,0 +1,32 @@
+﻿@model MedicalStorageSystem.ViewModels.SatislarFormViewModels
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Satış Geçmişi</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Müşteri Adı</th>
+            <th>İlaç Adı</th>
+            <th>İlaç Kodu</th>
+            <th>Satılan Miktar</th>
+            <th>Tarih</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var Satis in Model.Satislar)
+        {
+            <tr>
+                <td>@Satis.Musteri.ad</td>
+                <td>@Satis.Ilac.isim</td>
+                <td>@Satis.Ilac.medicine_code</td>
+                <td>@Satis.miktar</td>
+                <td>@Satis.tarih.Value.ToString("dd-MM-yyyy")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+ 

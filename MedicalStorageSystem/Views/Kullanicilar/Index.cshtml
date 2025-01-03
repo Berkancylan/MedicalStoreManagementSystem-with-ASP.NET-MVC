@@ -1,0 +1,30 @@
+﻿@using MedicalStorageSystem.Models.EntityFramework
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<a class="btn btn-success" href="/Kullanicilar/Yeni">Yeni Personel Ekle</a>
+
+<h2>Personeller</h2>
+
+<table class="table table-bordered" style="width:75%">
+    <thead>
+        <tr>
+            <th>Ad</th>
+            <th>Sifre</th>
+            <th>Rolü</th>
+    </thead>
+    <tbody>
+        @foreach (var Kullanici in Model)
+        {
+            <tr>
+                <td>@Kullanici.Ad</td>
+                <td>@Kullanici.Sifre</td>
+                <td>@Kullanici.Role</td>
+                <td style="width: 75px"><a class="btn btn-primary" href="/Kulanicilar/Guncelle/@Kullanici.Id">Güncelle</a></td>
+                <td style="width: 75px"><a class="btn btn-warning" style="background-color:red" href="/Ilaclar/Sil/@Kullanici.Id">Sil</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

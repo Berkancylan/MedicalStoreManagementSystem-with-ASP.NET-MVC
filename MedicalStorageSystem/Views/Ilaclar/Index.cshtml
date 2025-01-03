@@ -1,0 +1,46 @@
+﻿@using MedicalStorageSystem.Models.EntityFramework
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (User.IsInRole("A") || User.IsInRole("B"))
+{
+    <a class="btn btn-success" href="/Ilaclar/Yeni">İlaç Ekle</a>
+}
+
+
+<h2>İlaçlar</h2>
+
+<table class="table table-bordered" id="tblPersoneller">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>İlaç Kodu</th>
+            <th>Ad</th>
+            <th>Üretici</th>
+            <th>Fiyat</th>
+            <th>Stok Miktarı</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var Ilac in Model)
+        {
+            <tr>
+                <td>@Ilac.ilac_id</td>
+                <td>@Ilac.medicine_code</td>
+                <td>@Ilac.isim</td>
+                <td>@Ilac.uretici</td>
+                <td>@Ilac.fiyat</td>
+                <td>@Ilac.stok_miktari</td>
+
+                @if (User.IsInRole("A") || User.IsInRole("B"))
+                {
+                    <td><a class="btn btn-primary" href="/Ilaclar/Guncelle/@Ilac.ilac_id">Güncelle</a></td>
+                    <td><a class="btn btn-warning" style="background-color:red" href="/Ilaclar/Sil/@Ilac.ilac_id">Sil</a></td>
+                }
+
+            </tr>
+        }
+    </tbody>
+</table>

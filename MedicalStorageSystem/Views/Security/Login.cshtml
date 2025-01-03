@@ -1,0 +1,37 @@
+﻿@model MedicalStorageSystem.Models.EntityFramework.Kullanici
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="login">
+        <h3 class="text-center" style=" margin-top:50px;">Login form</h3>
+        <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+        <div class="container">
+            @ViewBag.Mesaj
+            @using (Html.BeginForm("Login", "Security", FormMethod.Post))
+            {
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Ad, new { @style = "font-weight:bold;" })
+                    @Html.TextBoxFor(m => m.Ad, new { @class = "form-control", placeholder = "Kullanıcı Adı" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Sifre, new { @style = "font-weight:bold;" })
+                    @Html.TextBoxFor(m => m.Sifre, new { @class = "form-control", placeholder = "Parola" })
+                </div>
+                <div class="form-group">
+                    <input type="submit" name="submit" class="btn btn-success" value="Submit">
+                </div>
+            }
+        </div>
+    </div>
+</body>
+</html>

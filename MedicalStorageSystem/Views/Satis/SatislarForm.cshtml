@@ -1,0 +1,38 @@
+﻿@model MedicalStorageSystem.Models.EntityFramework.Satis
+@{
+    ViewBag.Title = "SatislarForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Satış</h2>
+
+@using (Html.BeginForm("Kaydet", "Satis", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.musteri_id)
+        @Html.TextBoxFor(m => m.musteri_id, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.musteri_id)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Ilac.medicine_code)
+        @Html.TextBoxFor(m => m.Ilac.medicine_code, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Ilac.medicine_code)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.miktar)
+        @Html.TextBoxFor(m => m.miktar, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.miktar)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.tarih)
+        @Html.TextBoxFor(m => m.tarih, new { @class = "form-control", type = "date" })
+        @Html.ValidationMessageFor(m => m.tarih)
+    </div>
+
+
+    @Html.HiddenFor(m => m.satis_id)
+    <button type="submit" class="btn btn-success">Kaydet</button>
+}
