@@ -11,7 +11,8 @@ namespace MedicalStorageSystem.Models.EntityFramework
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Ilac
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,6 +22,8 @@ namespace MedicalStorageSystem.Models.EntityFramework
         }
     
         public int ilac_id { get; set; }
+
+        [Display(Name = "Ýlaç Kodu")]
         public Nullable<int> medicine_code { get; set; }
         public string isim { get; set; }
         public string uretici { get; set; }

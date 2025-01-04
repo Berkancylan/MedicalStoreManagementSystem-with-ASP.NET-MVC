@@ -11,13 +11,20 @@ namespace MedicalStorageSystem.Models.EntityFramework
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Satis
     {
         public int satis_id { get; set; }
+
+        [Display(Name = "Müþteri TC'si")]
         public Nullable<int> musteri_id { get; set; }
         public Nullable<int> ilac_id { get; set; }
+
+        [Display(Name = "Miktar")]
         public Nullable<int> miktar { get; set; }
+
+        [Display(Name = "Tarih")]
         public Nullable<System.DateTime> tarih { get; set; }
     
         public virtual Ilac Ilac { get; set; }

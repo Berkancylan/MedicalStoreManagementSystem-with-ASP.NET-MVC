@@ -189,6 +189,7 @@
     <Content Include="Views\Satis\SatislarForm.cshtml" />
     <Content Include="Views\Security\Login.cshtml" />
     <Content Include="Views\Kullanicilar\Index.cshtml" />
+    <Content Include="Views\Kullanicilar\KullanicilarForm.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

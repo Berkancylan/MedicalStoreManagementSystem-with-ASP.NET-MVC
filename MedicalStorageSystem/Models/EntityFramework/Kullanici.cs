@@ -11,7 +11,8 @@ namespace MedicalStorageSystem.Models.EntityFramework
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Kullanici
     {
         public int Id { get; set; }
