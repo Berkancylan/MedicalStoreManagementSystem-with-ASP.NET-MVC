@@ -1,32 +1,69 @@
-﻿@model MedicalStorageSystem.ViewModels.SatislarFormViewModels
+﻿@model MedicalStorageSystem.ViewModels.SearchViewModels
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Satış Geçmişi</h2>
+<form method="get" action="@Url.Action("Index", "AnaSayfa")">
+    <div class="form-group">
+        <label for="searchTerm">Arama Terimi:</label>
+        <input type="text" name="searchTerm" id="searchTerm" class="form-control" placeholder="Aramak istediğiniz kelimeyi girin" value="@Request["searchTerm"]" />
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Ara</button>
+</form>
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Müşteri Adı</th>
-            <th>İlaç Adı</th>
-            <th>İlaç Kodu</th>
-            <th>Satılan Miktar</th>
-            <th>Tarih</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var Satis in Model.Satislar)
-        {
+<hr />
+
+@if (Model.SearchResults != null && Model.SearchResults.Any())
+{
+    <table class="table table-bordered">
+        <thead>
             <tr>
-                <td>@Satis.Musteri.ad</td>
-                <td>@Satis.Ilac.isim</td>
-                <td>@Satis.Ilac.medicine_code</td>
-                <td>@Satis.miktar</td>
-                <td>@Satis.tarih.Value.ToString("dd-MM-yyyy")</td>
+                <th>Müşteri Adı</th>
+                <th>İlaç Adı</th>
+                <th>İlaç Kodu</th>
+                <th>Satılan Miktar</th>
+                <th>Tarih</th>
             </tr>
-        }
-    </tbody>
-</table>
- 
+        </thead>
+        <tbody>
+            @foreach (var Satis in Model.SatislarElenmis)
+            {
+                <tr>
+                    <td>@Satis.Musteri.ad</td>
+                    <td>@Satis.Ilac.isim</td>
+                    <td>@Satis.Ilac.medicine_code</td>
+                    <td>@Satis.miktar</td>
+                    <td>@Satis.tarih.Value.ToString("dd-MM-yyyy")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+else if (Model.SatislarHepsi != null)
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Müşteri Adı</th>
+                <th>İlaç Adı</th>
+                <th>İlaç Kodu</th>
+                <th>Satılan Miktar</th>
+                <th>Tarih</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Satis in Model.SatislarHepsi)
+            {
+                <tr>
+                    <td>@Satis.Musteri.ad</td>
+                    <td>@Satis.Ilac.isim</td>
+                    <td>@Satis.Ilac.medicine_code</td>
+                    <td>@Satis.miktar</td>
+                    <td>@Satis.tarih.Value.ToString("dd-MM-yyyy")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

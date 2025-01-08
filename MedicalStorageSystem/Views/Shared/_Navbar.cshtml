@@ -30,7 +30,8 @@
             <li class="active"><a href="/AnaSayfa">Ana Sayfa</a></li>
             <li><a href="/Satis">Satış</a></li>
             <li><a href="/Ilaclar">İlaçlar</a></li>
-            @if (User.IsInRole("A")){
+            @if (User.IsInRole("A"))
+            {
                 <li><a href="/Kullanicilar/Index">Kullanıcılar</a></li>
             }
             <li><a href="/Security/Logout">Çıkış Yap</a></li>
