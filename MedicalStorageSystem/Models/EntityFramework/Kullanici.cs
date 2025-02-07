@@ -16,8 +16,16 @@ namespace MedicalStorageSystem.Models.EntityFramework
     public partial class Kullanici
     {
         public int Id { get; set; }
+
+        [Required(ErrorMessage ="Ad alaný zorunludur")]
         public string Ad { get; set; }
+
+        [Display(Name = "Þifre")]
+        [Required(ErrorMessage = "Þifre alaný zorunludur")]
         public string Sifre { get; set; }
+
+        [Display(Name = "Rol")]
+        [Required(ErrorMessage = "Rol alaný zorunludur")]
         public string Role { get; set; }
     }
 }

@@ -20,14 +20,28 @@ namespace MedicalStorageSystem.Models.EntityFramework
         {
             this.Satis = new HashSet<Satis>();
         }
-    
+
+        
         public int ilac_id { get; set; }
 
         [Display(Name = "Ýlaç Kodu")]
+        [Required(ErrorMessage ="Ýlaç kodu alaný zorunludur")]
         public Nullable<int> medicine_code { get; set; }
+
+        [Display(Name = "Ýlaç Adý")]
+        [Required(ErrorMessage = "Ýlaç Adý alaný zorunludur")]
         public string isim { get; set; }
+
+        [Display(Name = "Üretici Firma")]
+        [Required(ErrorMessage = "Üretici Firma alaný zorunludur")]
         public string uretici { get; set; }
+
+        [Display(Name = "Fiyat")]
+        [Required(ErrorMessage = "Fiyat alaný zorunludur")]
         public Nullable<decimal> fiyat { get; set; }
+
+        [Display(Name = "Stok Miktarý")]
+        [Required(ErrorMessage = "Stok miktarý alaný zorunludur")]
         public Nullable<int> stok_miktari { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

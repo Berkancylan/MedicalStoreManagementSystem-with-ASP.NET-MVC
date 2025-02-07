@@ -11,8 +11,7 @@ namespace MedicalStorageSystem.Models.EntityFramework
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Musteri
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,6 +19,7 @@ namespace MedicalStorageSystem.Models.EntityFramework
         {
             this.Satis = new HashSet<Satis>();
         }
+    
         public int musteri_id { get; set; }
         public string ad { get; set; }
         public string soyad { get; set; }

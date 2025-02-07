@@ -4,13 +4,19 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@if (User.IsInRole("A") || User.IsInRole("B"))
-{
-    <a class="btn btn-success" href="/Ilaclar/Yeni">İlaç Ekle</a>
-}
+<form method="get" style="display:flex" action="@Url.Action("Index", "Ilaclar")">
+    <div class="form-group" style="width:100%">
+        <label for="searchTerm">Arama Terimi:</label>
+        <div>
+            <input type="text" name="searchTerm" id="searchTerm" class="form-control" placeholder="Aramak istediğiniz kelimeyi girin" value="@Request["searchTerm"]" onchange="this.form.submit()" />
+            @if (User.IsInRole("A") || User.IsInRole("B"))
+            {
+                <a class="btn btn-success" href="/Ilaclar/Yeni" style="margin-left:10px">İlaç Ekle</a>
+            }
+        </div>
 
-
-<h2>İlaçlar</h2>
+    </div>
+</form>
 
 <table class="table table-bordered" id="tblPersoneller">
     <thead>
@@ -21,6 +27,11 @@
             <th>Üretici</th>
             <th>Fiyat</th>
             <th>Stok Miktarı</th>
+            @if (User.IsInRole("A") || User.IsInRole("B"))
+            {
+                <th></th>
+                <th></th>
+            }
         </tr>
     </thead>
     <tbody>

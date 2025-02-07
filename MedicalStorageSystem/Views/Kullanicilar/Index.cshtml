@@ -4,27 +4,38 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<a class="btn btn-success" href="/Kullanicilar/Yeni">Yeni Personel Ekle</a>
+<div style="margin-right:12%;margin-left:12%;">
+    <form method="get" style="display:flex" action="@Url.Action("Index", "Kullanicilar")">
+        <div class="form-group" style="width:100%">
+            <label for="searchTerm">Arama Terimi:</label>
+            <div>
+                <input type="text" name="searchTerm" id="searchTerm" class="form-control" placeholder="Aramak istediğiniz kelimeyi girin" value="@Request["searchTerm"]" onchange="this.form.submit()" />
+                <a class="btn btn-success" href="/Kullanicilar/Yeni" style="margin-left:10px">Yeni Personel Ekle</a>
+            </div>
+        </div>
+    </form>
+    
 
-<h2>Personeller</h2>
-
-<table class="table table-bordered" style="width:75%">
-    <thead>
-        <tr>
-            <th>Ad</th>
-            <th>Şifre</th>
-            <th>Rolü</th>
-    </thead>
-    <tbody>
-        @foreach (var Kullanici in Model)
-        {
+    <table class="table table-bordered">
+        <thead>
             <tr>
-                <td>@Kullanici.Ad</td>
-                <td>@Kullanici.Sifre</td>
-                <td>@Kullanici.Role</td>
-                <td style="width: 75px"><a class="btn btn-primary" href="/Kullanicilar/Guncelle/@Kullanici.Id">Güncelle</a></td>
-                <td style="width: 75px"><a class="btn btn-warning" style="background-color:red" href="/Kullanicilar/Sil/@Kullanici.Id">Sil</a></td>
-            </tr>
-        }
-    </tbody>
-</table>
+                <th>Ad</th>
+                <th>Şifre</th>
+                <th>Rolü</th>
+                <th></th>
+                <th></th>
+        </thead>
+        <tbody>
+            @foreach (var Kullanici in Model)
+            {
+                <tr>
+                    <td>@Kullanici.Ad</td>
+                    <td>@Kullanici.Sifre</td>
+                    <td>@Kullanici.Role</td>
+                    <td style="width: 75px"><a class="btn btn-primary" href="/Kullanicilar/Guncelle/@Kullanici.Id">Güncelle</a></td>
+                    <td style="width: 75px"><a class="btn btn-warning" style="background-color:red" href="/Kullanicilar/Sil/@Kullanici.Id">Sil</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

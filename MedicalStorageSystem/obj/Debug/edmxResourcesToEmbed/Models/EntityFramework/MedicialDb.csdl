@@ -58,6 +58,7 @@
       <End Role="Musteri" EntitySet="Musteri" />
       <End Role="Satis" EntitySet="Satis" />
     </AssociationSet>
+    <EntitySet Name="vw_SatisDetay" EntityType="MedicalStoreModel.vw_SatisDetay" />
   </EntityContainer>
   <EntityType Name="Musteri">
     <Key>
@@ -80,4 +81,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="vw_SatisDetay">
+    <Key>
+      <PropertyRef Name="SatisID" />
+    </Key>
+    <Property Name="SatisID" Type="Int32" Nullable="false" />
+    <Property Name="MusteriAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IlacAdi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="IlacKodu" Type="Int32" />
+    <Property Name="Miktar" Type="Int32" />
+    <Property Name="Tarih" Type="DateTime" Precision="0" />
+  </EntityType>
 </Schema>

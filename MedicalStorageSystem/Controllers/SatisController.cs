@@ -17,6 +17,8 @@ namespace MedicalStorageSystem.Controllers
         {
             return View("SatislarForm", new Satis());
         }
+
+        [HttpPost]
         public ActionResult Kaydet(Satis satis)
         {
             satis.Ilac = db.Ilac.FirstOrDefault(x => x.medicine_code == satis.Ilac.medicine_code);

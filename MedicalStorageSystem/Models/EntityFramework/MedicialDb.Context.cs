@@ -29,5 +29,6 @@ namespace MedicalStorageSystem.Models.EntityFramework
         public virtual DbSet<Kullanici> Kullanici { get; set; }
         public virtual DbSet<Satis> Satis { get; set; }
         public virtual DbSet<Musteri> Musteri { get; set; }
+        public virtual DbSet<vw_SatisDetay> vw_SatisDetay { get; set; }
     }
 }

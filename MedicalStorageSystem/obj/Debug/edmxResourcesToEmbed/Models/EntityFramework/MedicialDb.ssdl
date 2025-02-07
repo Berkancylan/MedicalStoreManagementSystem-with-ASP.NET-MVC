@@ -38,6 +38,19 @@
     <Property Name="miktar" Type="int" />
     <Property Name="tarih" Type="date" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'MedicalStore.dbo.vw_SatisDetay' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vw_SatisDetay">
+    <Key>
+      <PropertyRef Name="SatisID" />
+    </Key>
+    <Property Name="SatisID" Type="int" Nullable="false" />
+    <Property Name="MusteriAdi" Type="nvarchar" MaxLength="50" />
+    <Property Name="IlacAdi" Type="nvarchar" MaxLength="100" />
+    <Property Name="IlacKodu" Type="int" />
+    <Property Name="Miktar" Type="int" />
+    <Property Name="Tarih" Type="date" />
+  </EntityType>
   <Association Name="FK_Satislar_Ilaclar1">
     <End Role="Ilac" Type="Self.Ilac" Multiplicity="0..1" />
     <End Role="Satis" Type="Self.Satis" Multiplicity="*" />
@@ -67,6 +80,16 @@
     <EntitySet Name="Kullanici" EntityType="Self.Kullanici" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Musteri" EntityType="Self.Musteri" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Satis" EntityType="Self.Satis" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="vw_SatisDetay" EntityType="Self.vw_SatisDetay" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_SatisDetay].[SatisID] AS [SatisID], 
+    [vw_SatisDetay].[MusteriAdi] AS [MusteriAdi], 
+    [vw_SatisDetay].[IlacAdi] AS [IlacAdi], 
+    [vw_SatisDetay].[IlacKodu] AS [IlacKodu], 
+    [vw_SatisDetay].[Miktar] AS [Miktar], 
+    [vw_SatisDetay].[Tarih] AS [Tarih]
+    FROM [dbo].[vw_SatisDetay] AS [vw_SatisDetay]</DefiningQuery>
+    </EntitySet>
     <AssociationSet Name="FK_Satislar_Ilaclar1" Association="Self.FK_Satislar_Ilaclar1">
       <End Role="Ilac" EntitySet="Ilac" />
       <End Role="Satis" EntitySet="Satis" />

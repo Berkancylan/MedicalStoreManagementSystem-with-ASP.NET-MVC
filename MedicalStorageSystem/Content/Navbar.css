@@ -1,0 +1,44 @@
+﻿.navbar-default .container-fluid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.navbar-header {
+    position: absolute;
+    left: 0;
+}
+
+.navbar-nav {
+    display: flex;
+    justify-content: center;
+}
+
+.navbar-brand {
+    margin-left: 15px !important;
+}
+
+.nav{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:none;
+}
+    .nav li {
+        border-bottom: 2px solid #ccc;
+        margin:8px;
+    }
+        .nav li:hover {
+            border-bottom: 2px solid #18283b;
+        }
+        .nav li.active {
+            border-bottom: 2px solid #18283b;
+        }
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:focus,
+.navbar-default .navbar-nav > .active > a:hover {
+    color: #555;
+    background:none;
+}

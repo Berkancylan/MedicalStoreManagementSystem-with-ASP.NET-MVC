@@ -43,5 +43,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="vw_SatisDetay">
+      <EntityTypeMapping TypeName="MedicalStoreModel.vw_SatisDetay">
+        <MappingFragment StoreEntitySet="vw_SatisDetay">
+          <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+          <ScalarProperty Name="Miktar" ColumnName="Miktar" />
+          <ScalarProperty Name="IlacKodu" ColumnName="IlacKodu" />
+          <ScalarProperty Name="IlacAdi" ColumnName="IlacAdi" />
+          <ScalarProperty Name="MusteriAdi" ColumnName="MusteriAdi" />
+          <ScalarProperty Name="SatisID" ColumnName="SatisID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

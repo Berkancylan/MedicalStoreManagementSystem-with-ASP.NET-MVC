@@ -1,0 +1,72 @@
+﻿body {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+/* Genel Tablo Stili */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Source Sans Pro', sans-serif;
+    background-color: #fff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+}
+
+/* Tablo Başlıkları */
+th {
+    background-color: #34495E; /* Daha yumuşak bir koyu gri */
+    color: white;
+    text-align: left;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #ddd;
+}
+
+/* Satır Stili */
+td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Hover Efekti */
+tr:hover {
+    background-color: #f5f5f5;
+    transition: 0.3s ease-in-out;
+}
+
+/* Yuvarlatılmış Kenarlar */
+table {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th:first-child {
+    border-top-left-radius: 8px;
+}
+
+th:last-child {
+    border-top-right-radius: 8px;
+}
+
+/* Responsive Tasarım */
+@media screen and (max-width: 768px) {
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
+
+.form-group div{
+    display:flex;
+    align-items:center;
+}
+.form-group button{
+    margin-left:10px;
+}

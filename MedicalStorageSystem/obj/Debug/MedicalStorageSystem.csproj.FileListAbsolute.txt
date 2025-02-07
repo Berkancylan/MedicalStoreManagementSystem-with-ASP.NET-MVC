@@ -150,3 +150,7 @@ C:\Users\PC\Documents\GitHub\BerkanProje\Medical_Store_Management_System-Web-App
 C:\Users\PC\Documents\GitHub\BerkanProje\Medical_Store_Management_System-Web-Application-\MedicalStorageSystem\obj\Debug\MedicalStorageSystem.csproj.CopyComplete
 C:\Users\PC\Documents\GitHub\BerkanProje\Medical_Store_Management_System-Web-Application-\MedicalStorageSystem\obj\Debug\MedicalStorageSystem.dll
 C:\Users\PC\Documents\GitHub\BerkanProje\Medical_Store_Management_System-Web-Application-\MedicalStorageSystem\obj\Debug\MedicalStorageSystem.pdb
+C:\Users\PC\Desktop\ASPNET MVC\MedicalStorageSystem\bin\PagedList.dll
+C:\Users\PC\Desktop\ASPNET MVC\MedicalStorageSystem\bin\PagedList.Mvc.dll
+C:\Users\PC\Desktop\ASPNET MVC\MedicalStorageSystem\bin\PagedList.xml
+C:\Users\PC\Desktop\ASPNET MVC\MedicalStorageSystem\bin\PagedList.Mvc.xml

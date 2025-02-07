@@ -1,0 +1,37 @@
+﻿.containerr {
+    display: flex;
+    gap: 20px;
+    background-color: #f8f8fb;
+    padding: 40px;
+}
+.new_navbar {
+    
+    width: 166px;
+    background-color: gray;
+    border-radius:10px;
+}
+.renderBody {
+    flex-grow: 1;
+}
+.new_navbar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.new_navbar li {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border-radius: 8px;
+    transition: background 0.3s ease;
+    text-align:center;
+}
+
+
+    .new_navbar li a {
+        text-decoration: none;
+        color: #333;
+        font-size: 16px;
+        flex-grow: 1; 
+    }

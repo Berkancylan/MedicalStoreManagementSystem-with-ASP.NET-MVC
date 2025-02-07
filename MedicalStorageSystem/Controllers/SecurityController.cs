@@ -26,8 +26,8 @@ namespace MedicalStorageSystem.Controllers
             }
             else
             {
-                ViewBag.Mesaj = "Geçersiz Kullanici Adı veya Şifre";
-                return View();
+                ViewBag.LoginError = "Geçersiz Kullanici Adı veya Şifre";
+                return View(kullanici);
             }
         }
         public ActionResult Logout()

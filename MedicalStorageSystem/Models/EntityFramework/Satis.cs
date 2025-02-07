@@ -17,14 +17,17 @@ namespace MedicalStorageSystem.Models.EntityFramework
     {
         public int satis_id { get; set; }
 
-        [Display(Name = "Müþteri TC'si")]
+        [Display(Name = "Müþteri ID")]
+        [Required(ErrorMessage ="Müþteri ID alaný zorunludur")]
         public Nullable<int> musteri_id { get; set; }
         public Nullable<int> ilac_id { get; set; }
 
         [Display(Name = "Miktar")]
+        [Required(ErrorMessage = "Miktar alaný zorunludur")]
         public Nullable<int> miktar { get; set; }
 
         [Display(Name = "Tarih")]
+        [Required(ErrorMessage = "Tarih alaný zorunludur")]
         public Nullable<System.DateTime> tarih { get; set; }
     
         public virtual Ilac Ilac { get; set; }

@@ -43,6 +43,19 @@
           <Property Name="miktar" Type="int" />
           <Property Name="tarih" Type="date" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'MedicalStore.dbo.vw_SatisDetay' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_SatisDetay">
+          <Key>
+            <PropertyRef Name="SatisID" />
+          </Key>
+          <Property Name="SatisID" Type="int" Nullable="false" />
+          <Property Name="MusteriAdi" Type="nvarchar" MaxLength="50" />
+          <Property Name="IlacAdi" Type="nvarchar" MaxLength="100" />
+          <Property Name="IlacKodu" Type="int" />
+          <Property Name="Miktar" Type="int" />
+          <Property Name="Tarih" Type="date" />
+        </EntityType>
         <Association Name="FK_Satislar_Ilaclar1">
           <End Role="Ilac" Type="Self.Ilac" Multiplicity="0..1" />
           <End Role="Satis" Type="Self.Satis" Multiplicity="*" />
@@ -72,6 +85,16 @@
           <EntitySet Name="Kullanici" EntityType="Self.Kullanici" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Musteri" EntityType="Self.Musteri" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Satis" EntityType="Self.Satis" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vw_SatisDetay" EntityType="Self.vw_SatisDetay" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_SatisDetay].[SatisID] AS [SatisID], 
+    [vw_SatisDetay].[MusteriAdi] AS [MusteriAdi], 
+    [vw_SatisDetay].[IlacAdi] AS [IlacAdi], 
+    [vw_SatisDetay].[IlacKodu] AS [IlacKodu], 
+    [vw_SatisDetay].[Miktar] AS [Miktar], 
+    [vw_SatisDetay].[Tarih] AS [Tarih]
+    FROM [dbo].[vw_SatisDetay] AS [vw_SatisDetay]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Satislar_Ilaclar1" Association="Self.FK_Satislar_Ilaclar1">
             <End Role="Ilac" EntitySet="Ilac" />
             <End Role="Satis" EntitySet="Satis" />
@@ -143,6 +166,7 @@
             <End Role="Musteri" EntitySet="Musteri" />
             <End Role="Satis" EntitySet="Satis" />
           </AssociationSet>
+          <EntitySet Name="vw_SatisDetay" EntityType="MedicalStoreModel.vw_SatisDetay" />
         </EntityContainer>
         <EntityType Name="Musteri">
           <Key>
@@ -165,6 +189,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vw_SatisDetay">
+          <Key>
+            <PropertyRef Name="SatisID" />
+          </Key>
+          <Property Name="SatisID" Type="Int32" Nullable="false" />
+          <Property Name="MusteriAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IlacAdi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IlacKodu" Type="Int32" />
+          <Property Name="Miktar" Type="Int32" />
+          <Property Name="Tarih" Type="DateTime" Precision="0" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -210,6 +245,18 @@
                 <ScalarProperty Name="soyad" ColumnName="soyad" />
                 <ScalarProperty Name="ad" ColumnName="ad" />
                 <ScalarProperty Name="musteri_id" ColumnName="musteri_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_SatisDetay">
+            <EntityTypeMapping TypeName="MedicalStoreModel.vw_SatisDetay">
+              <MappingFragment StoreEntitySet="vw_SatisDetay">
+                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+                <ScalarProperty Name="Miktar" ColumnName="Miktar" />
+                <ScalarProperty Name="IlacKodu" ColumnName="IlacKodu" />
+                <ScalarProperty Name="IlacAdi" ColumnName="IlacAdi" />
+                <ScalarProperty Name="MusteriAdi" ColumnName="MusteriAdi" />
+                <ScalarProperty Name="SatisID" ColumnName="SatisID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
