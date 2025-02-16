@@ -1,5 +1,6 @@
 ﻿using MedicalStorageSystem.Models;
 using MedicalStorageSystem.Models.EntityFramework;
+using MedicalStorageSystem.Services;
 using MedicalStorageSystem.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -17,15 +18,18 @@ namespace MedicalStorageSystem.Controllers
         MedicalStoreEntities4 db = new MedicalStoreEntities4();
 
         [Authorize]
-        public ActionResult Index(string searchTerm)
+        public ActionResult Index(string searchTerm, int? pageSize, bool? pageSizeBool, int? pageNumber)
         {
-            var model = db.vw_SatisDetay.ToList();
+            var _tableService = new TableService();
+            (int mevcutSayfa,int finalPageSize,int offset) = _tableService.getDataFromTable(pageSize, pageSizeBool, pageNumber);
 
             if (!string.IsNullOrEmpty(searchTerm))
             {
                 var results = db.Database.SqlQuery<SearchResult>(
-                    "EXEC SearchSatisByColumns @searchTerm",
-                    new SqlParameter("@searchTerm", searchTerm)
+                    "EXEC SearchSatisPagingByColumns @searchTerm, @offset, @pageSize",
+                    new SqlParameter("@searchTerm", searchTerm),
+                    new SqlParameter("@offset", offset),
+                    new SqlParameter("@pageSize", finalPageSize)
                 ).ToList();
 
                 var vw_satisDetay = new List<vw_SatisDetay>();
@@ -43,11 +47,23 @@ namespace MedicalStorageSystem.Controllers
                         }
                     }
                 }
-                model = vw_satisDetay;
+                var model = vw_satisDetay;
+                ViewBag.Page = mevcutSayfa;
+                return View(model);
             }
-            return View(model);
+            else
+            {
+                var results = db.Database.SqlQuery<vw_SatisDetay>(
+                    "SELECT * FROM dbo.vw_SatisDetay\r\nORDER BY Tarih DESC OFFSET @offset ROWS FETCH NEXT @pageSize ROWS ONLY",
+                    new SqlParameter("@offset", offset),
+                    new SqlParameter("@pageSize", finalPageSize)
+                    ).ToList();
 
+                var model = results;
+                ViewBag.Page = mevcutSayfa;
+                return View(model);
+
+            }
         }
-
     }
 }

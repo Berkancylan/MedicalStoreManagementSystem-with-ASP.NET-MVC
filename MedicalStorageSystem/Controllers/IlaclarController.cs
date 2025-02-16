@@ -1,8 +1,10 @@
 ﻿using MedicalStorageSystem.Models;
 using MedicalStorageSystem.Models.EntityFramework;
+using MedicalStorageSystem.Services;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -12,15 +14,19 @@ namespace MedicalStorageSystem.Controllers
     public class IlaclarController : Controller
     {
         MedicalStoreEntities4 db = new MedicalStoreEntities4();
-        public ActionResult Index(string searchTerm)
+        public ActionResult Index(string searchTerm, int? pageSize, bool? pageSizeBool, int? pageNumber)
         {
-            var model = db.Ilac.ToList();
+            var _tableService = new TableService();
+            (int mevcutSayfa, int finalPageSize, int offset) = _tableService.getDataFromTable(pageSize, pageSizeBool, pageNumber);
+
 
             if (!string.IsNullOrEmpty(searchTerm))
             {
                 var results = db.Database.SqlQuery<SearchResult>(
-                    "EXEC SearchIlacByColumns @searchTerm",
-                    new SqlParameter("@searchTerm", searchTerm)
+                    "EXEC SearchIlacPagingByColumns @searchTerm, @offset, @pageSize",
+                    new SqlParameter("@searchTerm", searchTerm),
+                    new SqlParameter("@offset", offset),
+                    new SqlParameter("@pageSize", finalPageSize)
                 ).ToList();
 
                 var ilaclar = new List<Ilac>();
@@ -29,18 +35,32 @@ namespace MedicalStorageSystem.Controllers
                 {
                     if (result.TabloAdi == "Ilac")
                     {
-                        var ilac = db.Ilac.Find(result.ID);
+                        var ilacDetayTemp = db.Ilac.Find(result.ID);
 
-                        if (ilac != null)
+                        if (ilacDetayTemp != null)
                         {
-                            var ilac_1 = db.Ilac.Where(s => s.ilac_id == ilac.ilac_id).ToList();
-                            ilaclar.AddRange(ilac_1);
+                            var ilacDetay = db.Ilac.Where(s => s.ilac_id == ilacDetayTemp.ilac_id).ToList();
+                            ilaclar.AddRange(ilacDetay);
                         }
                     }
                 }
-                model = ilaclar;
+                var model = ilaclar;
+                ViewBag.Page = mevcutSayfa;
+                return View(model);
             }
-            return View(model);
+            else
+            {
+                var results = db.Database.SqlQuery<Ilac>(
+                    "SELECT * FROM dbo.Ilac\r\nORDER BY ilac_id ASC OFFSET @offset ROWS FETCH NEXT @pageSize ROWS ONLY",
+                    new SqlParameter("@offset", offset),
+                    new SqlParameter("@pageSize", finalPageSize)
+                    ).ToList();
+
+                var model = results;
+                ViewBag.Page = mevcutSayfa;
+                return View(model);
+
+            }
         }
 
         [Authorize(Roles = "A,B")]

@@ -4,38 +4,58 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<form method="get" style="display:flex" action="@Url.Action("Index", "AnaSayfa")">
+<form method="get" action="@Url.Action("Index", "AnaSayfa")">
     <div class="form-group" style="width:100%">
         <label for="searchTerm">Arama Terimi:</label>
         <div>
             <input type="text" name="searchTerm" id="searchTerm" class="form-control" placeholder="Aramak istediğiniz kelimeyi girin" value="@Request["searchTerm"]" onchange="this.form.submit()" />
+            <div>
+                <label style="display:flex; align-items:center; margin-left:10px;">
+                    SHOW
+                    <select style="margin-left:5px; margin-right:5px; border-radius:3px;" id="entriesSelect" name="pageSize" onchange="this.form.submit()">
+                        <option value="10" @(Request["pageSize"] == "10" ? "selected" : "")>10</option>
+                        <option value="25" @(Request["pageSize"] == "25" ? "selected" : "")>25</option>
+                        <option value="50" @(Request["pageSize"] == "50" ? "selected" : "")>50</option>
+                    </select>
+                    ENTRIES
+                </label>
+            </div>
         </div>
+    </div>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Satış ID</th>
+                <th>Müşteri Adı</th>
+                <th>İlaç Adı</th>
+                <th>İlaç Kodu</th>
+                <th>Satılan Miktar</th>
+                <th>Tarih</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var vw_SatisDetay in Model)
+            {
+                <tr>
+                    <td>@vw_SatisDetay.SatisID</td>
+                    <td>@vw_SatisDetay.MusteriAdi</td>
+                    <td>@vw_SatisDetay.IlacAdi</td>
+                    <td>@vw_SatisDetay.IlacKodu</td>
+                    <td>@vw_SatisDetay.Miktar</td>
+                    <td>@vw_SatisDetay.Tarih.ToString("dd.MM.yyyy")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="pagination-container">
+        <input type="hidden" name="pageNumber" value="@ViewBag.Page">
+        <button class ="pageButton"type="submit" name="pageSizeBool" value="false">&lt;</button>
+        <span class="page-number">Sayfa @ViewBag.Page</span>
+        <button class ="pageButton"type="submit" name="pageSizeBool" value="true">&gt;</button>
     </div>
 
 </form>
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Satış ID</th>
-            <th>Müşteri Adı</th>
-            <th>İlaç Adı</th>
-            <th>İlaç Kodu</th>
-            <th>Satılan Miktar</th>
-            <th>Tarih</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var vw_SatisDetay in Model)
-        {
-            <tr>
-                <td>@vw_SatisDetay.SatisID</td>
-                <td>@vw_SatisDetay.MusteriAdi</td>
-                <td>@vw_SatisDetay.IlacAdi</td>
-                <td>@vw_SatisDetay.IlacKodu</td>
-                <td>@vw_SatisDetay.Miktar</td>
-                <td>@vw_SatisDetay.Tarih.ToString("dd.MM.yyyy")</td>
-            </tr>
-        }
-    </tbody>
-</table>
+

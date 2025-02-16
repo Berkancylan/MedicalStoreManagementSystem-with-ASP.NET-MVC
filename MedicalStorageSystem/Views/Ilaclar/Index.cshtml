@@ -4,11 +4,22 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<form method="get" style="display:flex" action="@Url.Action("Index", "Ilaclar")">
+<form method="get" action="@Url.Action("Index", "Ilaclar")">
     <div class="form-group" style="width:100%">
         <label for="searchTerm">Arama Terimi:</label>
         <div>
             <input type="text" name="searchTerm" id="searchTerm" class="form-control" placeholder="Aramak istediğiniz kelimeyi girin" value="@Request["searchTerm"]" onchange="this.form.submit()" />
+            <div>
+                <label style="display:flex; align-items:center; margin-left:10px;">
+                    SHOW
+                    <select style="margin-left:5px; margin-right:5px; border-radius:3px;" id="entriesSelect" name="pageSize" onchange="this.form.submit()">
+                        <option value="10" @(Request["pageSize"] == "10" ? "selected" : "")>10</option>
+                        <option value="25" @(Request["pageSize"] == "25" ? "selected" : "")>25</option>
+                        <option value="50" @(Request["pageSize"] == "50" ? "selected" : "")>50</option>
+                    </select>
+                    ENTRIES
+                </label>
+            </div>
             @if (User.IsInRole("A") || User.IsInRole("B"))
             {
                 <a class="btn btn-success" href="/Ilaclar/Yeni" style="margin-left:10px">İlaç Ekle</a>
@@ -16,42 +27,49 @@
         </div>
 
     </div>
-</form>
-
-<table class="table table-bordered" id="tblPersoneller">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>İlaç Kodu</th>
-            <th>Ad</th>
-            <th>Üretici</th>
-            <th>Fiyat</th>
-            <th>Stok Miktarı</th>
-            @if (User.IsInRole("A") || User.IsInRole("B"))
-            {
-                <th></th>
-                <th></th>
-            }
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var Ilac in Model)
-        {
+    <table class="table table-bordered" id="tblPersoneller">
+        <thead>
             <tr>
-                <td>@Ilac.ilac_id</td>
-                <td>@Ilac.medicine_code</td>
-                <td>@Ilac.isim</td>
-                <td>@Ilac.uretici</td>
-                <td>@Ilac.fiyat</td>
-                <td>@Ilac.stok_miktari</td>
-
+                <th>ID</th>
+                <th>İlaç Kodu</th>
+                <th>Ad</th>
+                <th>Üretici</th>
+                <th>Fiyat</th>
+                <th>Stok Miktarı</th>
                 @if (User.IsInRole("A") || User.IsInRole("B"))
                 {
-                    <td><a class="btn btn-primary" href="/Ilaclar/Guncelle/@Ilac.ilac_id">Güncelle</a></td>
-                    <td><a class="btn btn-warning" style="background-color:red" href="/Ilaclar/Sil/@Ilac.ilac_id">Sil</a></td>
+                    <th></th>
+                    <th></th>
                 }
-
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var Ilac in Model)
+            {
+                <tr>
+                    <td>@Ilac.ilac_id</td>
+                    <td>@Ilac.medicine_code</td>
+                    <td>@Ilac.isim</td>
+                    <td>@Ilac.uretici</td>
+                    <td>@Ilac.fiyat</td>
+                    <td>@Ilac.stok_miktari</td>
+
+                    @if (User.IsInRole("A") || User.IsInRole("B"))
+                    {
+                        <td><a class="btn btn-primary" href="/Ilaclar/Guncelle/@Ilac.ilac_id">Güncelle</a></td>
+                        <td><a class="btn btn-warning" style="background-color:red" href="/Ilaclar/Sil/@Ilac.ilac_id">Sil</a></td>
+                    }
+
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="pagination-container">
+        <input type="hidden" name="pageNumber" value="@ViewBag.Page">
+        <button class="pageButton" type="submit" name="pageSizeBool" value="false">&lt;</button>
+        <span class="page-number">Sayfa @ViewBag.Page</span>
+        <button class="pageButton" type="submit" name="pageSizeBool" value="true">&gt;</button>
+    </div>
+</form>
+
+
